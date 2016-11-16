@@ -6,6 +6,26 @@
 	background: url(../img/header-bg.jpg) 50% 50% no-repeat;
 	background-size: cover;
 	padding: 25px 0;
+	.logo-container{
+		text-align: center;
+		color: #fff;
+		img{
+			line-height: 45px;
+			display: inline-block;
+			margin-top: 10px;
+			@media (max-width: 767px) {
+				display: none;
+			}
+		}
+		span{
+			line-height: 25px;
+			display: inline-block;
+			font-size: 13px;
+			@media (max-width: 767px) {
+				display: none;
+			}
+		}
+	}
 	.call-container{
 		@media screen and (max-width: 991px){
 			display: none;
@@ -19,9 +39,11 @@
 	}
 	.menu-wr{
 		background: rgba(#000,.5);
-		line-height: 70px;
 		@media screen and (max-width: 767px){
 			background: rgba(#000,.7);
+		}
+		@media (max-width: 767px) {
+			height: 70px;
 		}
 		.burger-menu{
 			display: none;
@@ -81,6 +103,7 @@
 				padding-top: 15px;
 				padding-bottom: 15px;
 				display: none;
+				z-index: 2;
 			}
 			li{
 				display: block;
@@ -99,6 +122,10 @@
 					text-decoration: none;
 					position: relative;
 					overflow: hidden;
+					line-height: 70px;
+					@media screen and (max-width: 767px){
+						line-height: 38px;
+					}
 					&:after{
 						content: '';
 						position: absolute;
@@ -125,54 +152,60 @@
 			}
 		}
 	}
-	.btn-download-price{
-		background: $brand-primary;
-		padding: 13px 45px;
-		color: #2f3332;
-		font-size: 15px;
-		font-weight: 600;
-		border-radius: 25px;
-		&:hover{
-			background: darken($brand-primary,10%);
+	.call-container{
+		line-height: 70px;
+		.btn-download-price{
+			background: $brand-primary;
+			padding: 13px 45px;
 			color: #2f3332;
-		}
-	}
-	// title
-	.header-title{
-		text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-		color: white;
-		font-size: 60px;
-		font-weight: 700;
-		text-align: center;
-		text-transform: uppercase;
-		margin-top: 100px;
-		@media screen and (max-width: 1199px){
-			br{
-				display: none;
+			font-size: 15px;
+			font-weight: 600;
+			border-radius: 25px;
+			&:hover{
+				background: darken($brand-primary,10%);
+				color: #2f3332;
 			}
 		}
-		@media screen and (max-width: 767px){
-			font-size: 30px;
-			margin-top: 50px;
-		}
 	}
-	.header-title2{
-		color: white;
-		font-size: 30px;
-		font-weight: 400;
-		margin-top: 30px;
-		text-align: center;
-		margin-bottom: 50px;
-		@media screen and (max-width: 1199px){
-			br{
-				display: none;
+
+	// new video header
+	.new-video-container{
+		.title1{
+			color: #fff;
+			font-size: 40px;
+			text-align: center;
+			padding: 15px;
+			line-height: 40px;
+			font-weight: bold;
+			@media screen and (max-width: 767px){
+				font-size: 28px;
+				line-height: 28px;
 			}
 		}
-		@media screen and (max-width: 767px){
-			font-size: 20px;
-			margin-bottom: 50px;
+		.video-left{
+			padding-top: 120px;
+			@media screen and (max-width: 767px){
+				padding-top: 0;
+			}
+		}
+		.video{
+			margin-top: 15px;
+			margin-bottom: 15px;
+			font-size: 40px;
+			line-height: 40px;
+			text-align: center;
+			font-weight: bold;
+			color: #fff;
+			@media screen and (max-width: 767px){
+				width: 100%;
+			}
+		}
+		.btn-primary{
+			margin-top: 15px;
 		}
 	}
+
+
 	// contacts
 	.contacts-wr{
 		background: #fff;
@@ -192,9 +225,9 @@
 		}
 		.contacts{
 			display: block;
-		  position: relative;
-		  top: 50%;
-		  transform: translateY(-50%);
+			position: relative;
+			top: 50%;
+			transform: translateY(-50%);
 			color: #525252;
 			font-size: 16px;
 			font-weight: 400;
@@ -244,6 +277,15 @@
 }
 .our-command-container{
 	padding: 80px 15px;
+	.comand-slider{
+		padding: 0 30px;
+		.people{
+			text-align: center;
+			img{
+				margin: 0 auto;
+			}
+		}
+	}
 	@media screen and (max-width: 767px){
 		.col-xs-4{
 			width: 100%;
@@ -286,6 +328,78 @@
 	padding: 40px 0;
 	background: url(../img/pattern.png) 0 0 repeat;
 	text-align: center;
+	.rev-slider{
+		.slide{
+			padding: 0 15px;
+			.desc{
+				font-size: 16px;
+				text-align: center;
+				font-weight: bold;
+				line-height: 19px;
+				margin-top: 10px;
+			}
+			a{
+				display: block;
+				position: relative;
+				&:before{
+					position: absolute;
+					content: '';
+					background-color: rgba(#000,.55);
+					background-image: url(../img/play-button.svg);
+					background-size: 40px 40px;
+					background-repeat: no-repeat;
+					background-position: 50% 50%;
+					width: 100%;
+					height: 100%;
+					top: 0;
+					left: 0;
+					opacity: 0;
+					transition: all .3s;
+				}
+				&:hover{
+					&:before{
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+	.slick-dots{
+		text-align: center;
+		margin: 30px 0 0 0;
+		padding: 0;
+		list-style: none;
+		li{
+			display: inline-block;
+			padding: 4px;
+			&.slick-active{
+				button{
+					background: #000;
+				}
+			}
+			button{
+				border: 3px solid $brand-primary;
+				padding: 0;
+				margin: 0;
+				display: inline-block;
+				width: 13px;
+				height: 13px;
+				border-radius: 50%;
+				text-indent: -9999px;
+				background: #eee;
+			}
+		}
+	}
+	.title{
+		font-size: 40px;
+		margin-bottom: 25px;
+		line-height: 40px;
+		font-weight: bold;
+		@media (max-width: 767px) {
+			font-size: 28px;
+			line-height: 28px;
+		}
+	}
 	@media screen and (max-width: 767px){
 		.col-xs-4{
 			width: 100%;
@@ -345,7 +459,6 @@
 	}
 	.first-block{
 		@media screen and (max-width: 991px){
-			width: 10%;
 			&:nth-child(1),
 			&:nth-child(2){
 				min-height: 520px;
@@ -367,10 +480,20 @@
 		@media screen and (max-width: 767px){
 			width: 100%;
 			min-height: 0;
+			&:nth-child(1),
+			&:nth-child(2){
+				min-height: 0;
+			}
 		}
 	}
 	.col-xs-3{
 		padding: 0 26px;
+		@media (max-width: 991px) {
+			width: 50%;
+		}
+		@media (max-width: 767px) {
+			width: 100% !important;
+		}
 		&:not(:last-child){
 			position: relative;
 			&:after{
@@ -515,12 +638,12 @@
 		}
 	}
 	&.slick-prev{
-		left: -20px;
+		left: -5px;
 		transform: rotate(-45deg);
 		&:after{left: 0;}
 	}
 	&.slick-next{
-		right: -20px;
+		right: -5px;
 		transform: rotate(135deg);
 		&:after{right: 0;}
 	}
@@ -587,12 +710,6 @@
 			display: inline-block;
 			padding: 3px 5px;
 		}
-	}
-}
-.fancybox-skin{
-	iframe{
-		width: 80vw;
-		height: 80vh;
 	}
 }
 
@@ -692,7 +809,7 @@
 				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 				background-repeat: no-repeat;
 				background-position: 50% 50%;
-				background-size: 20px auto;
+				background-size: 20px 20px;
 			}
 		}
 		&.net{

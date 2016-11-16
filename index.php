@@ -25,7 +25,8 @@
 				<div class="col-xs-12 menu-wr">
 					<div class="row">
 						<div class="col-xs-3 logo-container">
-							<a href="/"><img src="<?php bloginfo('template_url'); ?>/img/logo.png" alt="KvartMaster"></a>
+							<img src="<?php bloginfo('template_url'); ?>/img/logo.png" alt="KvartMaster">
+							<span>Минская строительная компания</span>
 						</div>
 						<div class="col-xs-6 menu-container">
 							<div class="burger-menu">
@@ -37,7 +38,6 @@
 								<li><a class="scroll" href="#about">О нас</a></li>
 								<li><a class="scroll" href="#costs">Цены</a></li>
 								<li><a class="scroll" href="#review">Отзывы</a></li>
-								<li><a class="scroll" href="#blog">Блог</a></li>
 							</ul>
 						</div>
 						<div class="col-xs-3 call-container">
@@ -47,9 +47,18 @@
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<h1 class="header-title"><?php the_field('h_title1','option') ?></h1>
-			<h2 class="header-title2"><?php the_field('h_title2','option') ?></h2>
+		<div class="container new-video-container">
+			<div class="row">
+				<div class="col-xs-12 title1">
+					Электромонтаж без пыли. Любой сложности.<br>Гарантия 10 лет по договору.
+				</div>
+				<div class="col-xs-6 video video-left">
+					Узнайте о нас за 2 минуты
+				</div>
+				<div class="col-xs-6 video">
+					<iframe width="100%" height="315" src="https://www.youtube.com/embed/imP20Vri5n0" frameborder="0" allowfullscreen></iframe>
+				</div>
+			</div>
 			<div class="centered">
 				<a href="#modalsimple" class="btn btn-primary fancybox" onclick="simpleTitle('Получить консультацию');">Получить консультацию</a>
 			</div>
@@ -88,54 +97,32 @@
 	<!-- our command -->
 	<div class="container our-command-container" id="about">
 		<h3 class="title-hr"><span><span>Наша команда</span></span></h3>
-		<div class="col-xs-4 people">
-			<?php $img1 = get_field('com_img1','option'); ?>
-			<img src="<?php echo $img1[sizes][thumbnail]; ?>" alt="<?php echo $img1[alt]; ?>">
-			<div class="name"><span><?php the_field('com_name1','option'); ?></span></div>
-			<div class="desc">
-				<?php the_field('com_text1','option'); ?>
-			</div>
-		</div>
-		<div class="col-xs-4 people">
-			<?php $img2 = get_field('com_img2','option'); ?>
-			<img src="<?php echo $img2[sizes][thumbnail]; ?>" alt="<?php echo $img2[alt]; ?>">
-			<div class="name"><span><?php the_field('com_name2','option'); ?></span></div>
-			<div class="desc">
-				<?php the_field('com_text2','option'); ?>
-			</div>
-		</div>
-		<div class="col-xs-4 people">
-			<?php $img3 = get_field('com_img3','option'); ?>
-			<img src="<?php echo $img3[sizes][thumbnail]; ?>" alt="<?php echo $img3[alt]; ?>">
-			<div class="name"><span><?php the_field('com_name3','option'); ?></span></div>
-			<div class="desc">
-				<?php the_field('com_text3','option'); ?>
-			</div>
+		<div class="comand-slider">
+			<?php if( have_rows('c_repeater', 'option') ):while ( have_rows('c_repeater', 'option') ) : the_row(); ?>
+				<div class="col-xs-4 people">
+					<?php $img1 = get_sub_field('c_photo'); ?>
+					<img src="<?php echo $img1[sizes][thumbnail]; ?>" alt="<?php echo $img1[alt]; ?>">
+					<div class="name"><span><?php the_sub_field('c_name'); ?></span></div>
+					<div class="desc">
+						<?php the_sub_field('c_desc'); ?>
+					</div>
+				</div>		
+			<?php endwhile;endif; ?>
 		</div>
 	</div>
 
 	<!-- counter -->
-	<div class="wrapper counter-wr">
+	<div class="wrapper counter-wr" id="review">
 		<div class="container">
-			<div class="row">
-				<div class="col-xs-4">
-					<div class="counter-container">
-						<span class="title"><?php the_field('num1','option'); ?></span>
-						<span class="desc">Выполненых<br>проектов</span>
+			<div class="title">Видео отзывы</div>
+			<div class="rev-slider">
+				<?php if( have_rows('rev_video','option') ):while ( have_rows('rev_video','option') ) : the_row(); ?>
+					<div class="slide">
+						<?php $revimg = get_sub_field('rev_img'); ?>
+						<a href="<?php the_sub_field('rev_vid'); ?>" class="fancybox fancybox.iframe"><img src="<?php echo $revimg[sizes][portfolio]; ?>" alt="<?php echo $revimg[alt]; ?>"></a>
+						<div class="desc"><?php the_sub_field('rev_desc'); ?></div>
 					</div>
-				</div>
-				<div class="col-xs-4">
-					<div class="counter-container">
-						<span class="title"><?php the_field('num2','option'); ?></span>
-						<span class="desc">Тонн стройматериалов<br>использовано</span>
-					</div>
-				</div>
-				<div class="col-xs-4">
-					<div class="counter-container">
-						<span class="title"><?php the_field('num3','option'); ?></span>
-						<span class="desc">Довольных<br>клиентов</span>
-					</div>
-				</div>
+				<?php endwhile;endif; ?>
 			</div>
 		</div>
 	</div>
@@ -212,92 +199,8 @@
 			</div>
 		</div>
 		<div class="centered">
-			<a href="<?php the_field('price','option'); ?>" class="btn btn-primary">Скачать прайс</a>
+			<a href="<?php the_field('price','option'); ?>" class="btn btn-primary">Реальная стоимость</a>
 			<a href="#modal" class="btn btn-primary fancybox" onclick="raschetTitle('Расчитать за меня');">Расчитать за меня</a>
-		</div>
-	</div>
-
-	<!-- portfolio -->
-	<div class="wrapper portfolio-wr" id="review">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 portfolio-container">
-					<!-- tabs -->
-					<ul class="tabs-menu" id="nav-tab">
-						<li><a class="one" href="#one">Проморолик</a></li>
-						<li class="active"><a class="two" href="#two">Наши работы</a></li>
-						<li><a class="three" href="#three">Отзывы о нас</a></li>
-					</ul>
-					<div class="tabs-container">
-						<!-- tab one -->
-						<div class="tabs-pane" id="one">
-							<?php the_field('promo','option'); ?>
-						</div>
-						<!-- tab two -->
-						<div class="tabs-pane active" id="two">
-							<div class="image-portfolio row">
-								<!-- image portfolio -->
-								<?php if( have_rows('our_work','option') ): while ( have_rows('our_work','option') ) : the_row(); ?>
-									<div class="col-xs-4">
-										<div class="row">
-											<div class="col-xs-12">
-												<?php $img1 = get_sub_field('ow_img1'); ?>
-												<div class="image" style="background-image: url(<?php echo $img1[sizes][portfolio]; ?>);">
-													<a href="<?php echo $img1[url]; ?>" class="fancybox" data-fancybox-group="portfolio-images" ></a>
-												</div>
-												<div class="title"><span><?php the_sub_field('ow_adres1'); ?></span></div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-xs-12">
-												<?php $img2 = get_sub_field('ow_img2'); ?>
-												<div class="image" style="background-image: url(<?php echo $img2[sizes][portfolio]; ?>);">
-													<a href="<?php echo $img2[url]; ?>" class="fancybox" data-fancybox-group="portfolio-images" ></a>
-												</div>
-												<div class="title"><span><?php the_sub_field('ow_adres2'); ?></span></div>
-											</div>
-										</div>
-									</div>
-								<?php endwhile; endif; ?>
-								<!-- / image portfolio -->
-							</div>
-						</div>
-						<!-- tab three -->
-						<div class="tabs-pane" id="three">
-							<div class="image-portfolio-video row">
-								<!-- video portfolio -->
-								<?php $pcnt = 0; ?>
-								<?php if( have_rows('our_work1','option') ): while ( have_rows('our_work1','option') ) : the_row(); ?>
-									<div class="col-xs-4">
-										<div class="row">
-											<div class="col-xs-12">
-												<?php $img1 = get_sub_field('ow_img1'); ?>
-												<div class="image" style="background-image: url(<?php echo $img1[sizes][portfolio]; ?>);">
-													<a href="#video<?=$pcnt?>" class="fancybox"></a>
-												</div>
-												<div class="title"><span><?php the_sub_field('ow_adres1'); ?></span></div>
-											</div>
-										</div>
-										<?php $pcnt++; ?>
-										<div class="row">
-											<div class="col-xs-12">
-												<?php $img2 = get_sub_field('ow_img2'); ?>
-												<div class="image" style="background-image: url(<?php echo $img2[sizes][portfolio]; ?>);">
-													<a href="#video<?=$pcnt?>" class="fancybox"></a>
-												</div>
-												<div class="title"><span><?php the_sub_field('ow_adres2'); ?></span></div>
-											</div>
-										</div>
-										<?php $pcnt++; ?>
-									</div>
-								<?php endwhile; endif; ?>
-								<!-- / video portfolio -->
-							</div>
-						</div>
-					</div>
-					<!-- / tabs -->
-				</div>
-			</div>
 		</div>
 	</div>
 
@@ -337,21 +240,6 @@
 			<div class="centered">
 				<a href="#modalsimple" class="btn btn-primary fancybox" onclick="simpleTitle('Убедитесь сами!');">Убедитесь сами!</a>
 			</div>
-		</div>
-	</div>
-
-	<!-- our blog -->
-	<div class="container our-blog" id="blog">
-		<div class="title-hr"><span><span>Наш блог</span></span></div>
-		<div class="our-blog-slider">
-			<?php $vcnt = 0; ?>
-			<?php if( have_rows('blog','option') ): while ( have_rows('blog','option') ) : the_row(); ?>
-				<?php $vcnt++; ?>
-				<?php $img = get_sub_field('img'); ?>
-				<a href="#videoblog<?=$vcnt?>" class="slide fancybox" style="background-image: url(<?php echo $img[sizes][portfolio]; ?>);">
-					<div class="title"><span><?php the_sub_field('title'); ?></span></div>
-				</a>
-			<?php endwhile; endif; ?>
 		</div>
 	</div>
 
@@ -439,28 +327,10 @@
 		</form>
 	</div>
 
-	<script src="<?php bloginfo('template_url'); ?>/js/min/jquery-2.2.3-min.js"></script>
-	<script src="<?php bloginfo('template_url'); ?>/js/min/jquery.fancybox-min.js"></script>
-	<script src="<?php bloginfo('template_url'); ?>/js/min/slick-min.js"></script>
-	<script src="<?php bloginfo('template_url'); ?>/js/min/script-min.js"></script>
+	<script src="<?php bloginfo('template_url'); ?>/js/dist/jquery-2.2.3-dist.js"></script>
+	<script src="<?php bloginfo('template_url'); ?>/js/dist/jquery.fancybox-dist.js"></script>
+	<script src="<?php bloginfo('template_url'); ?>/js/dist/slick-dist.js"></script>
+	<script src="<?php bloginfo('template_url'); ?>/js/dist/script-dist.js"></script>
 	<?php wp_footer(); ?>
-	
-	<!-- video portfolio -->
-	<?php $pcnt = 0; ?>
-	<?php if( have_rows('our_work1','option') ): while ( have_rows('our_work1','option') ) : the_row(); ?>
-			<div id="video<?=$pcnt?>" style="display: none;"><?php the_sub_field('video1'); ?></div>
-			<?php $pcnt++; ?>
-			<div id="video<?=$pcnt?>" style="display: none;"><?php the_sub_field('video2'); ?></div>
-			<?php $pcnt++; ?>
-		</div>
-	<?php endwhile; endif; ?>
-	<!-- video blog -->
-	<?php $vcnt = 0; ?>
-	<?php if( have_rows('blog','option') ): while ( have_rows('blog','option') ) : the_row(); ?>
-		<?php $vcnt++; ?>
-		<div id="videoblog<?=$vcnt?>" style="display: none;">
-			<?php the_sub_field('video'); ?>
-		</div>
-	<?php endwhile; endif; ?>
 </body>
 </html>

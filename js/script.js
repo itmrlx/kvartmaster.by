@@ -1,5 +1,5 @@
 // fancybox
-jQuery.fn.getTitle = function() { // Copy the title of every IMG tag and add it to its parent A so that fancybox can show titles
+jQuery.fn.getTitle = function() { 
   var arr = jQuery("a.fancybox");
   jQuery.each(arr, function() {
     var title = jQuery(this).children("img").attr("title");
@@ -7,9 +7,9 @@ jQuery.fn.getTitle = function() { // Copy the title of every IMG tag and add it 
   })
 }
 var thumbnails = jQuery("a:has(img)").not(".nolightbox").filter( function() { return /\.(jpe?g|png|gif|bmp)$/i.test(jQuery(this).attr('href')) }); // Find .post>a>img and create fancybox image gallery
-var posts = jQuery(".item-images"); //find post
+var posts = jQuery(".gallery-slider"); //find post
 posts.each(function() {
-  jQuery(this).find(thumbnails).addClass("fancybox").attr("rel","fancybox"+posts.index(this)).getTitle()
+  jQuery(this).find(thumbnails).addClass("fancybox").attr("rel","slide"+posts.index(this)).getTitle()
 });
 jQuery("a.fancybox").fancybox({ // fancybox on
   helpers : {
@@ -22,22 +22,22 @@ jQuery("a.fancybox").fancybox({ // fancybox on
 // portfolio slider
 $('.image-portfolio').slick({
   infinite: true,
-	dots: false,
+  dots: false,
   slidesToShow: 3,
   slidesToScroll: 1,
   responsive: [
-    {
-      breakpoint: 993,
-      settings: {
-        slidesToShow: 2,
-      }
-    },
-    {
-      breakpoint: 769,
-      settings: {
-        slidesToShow: 1,
-      }
-    },
+  {
+    breakpoint: 993,
+    settings: {
+      slidesToShow: 2,
+    }
+  },
+  {
+    breakpoint: 769,
+    settings: {
+      slidesToShow: 1,
+    }
+  },
   ]
 });
 $('.image-portfolio-video').slick({
@@ -46,38 +46,38 @@ $('.image-portfolio-video').slick({
   slidesToShow: 3,
   slidesToScroll: 1,
   responsive: [
-    {
-      breakpoint: 993,
-      settings: {
-        slidesToShow: 2,
-      }
-    },
-    {
-      breakpoint: 769,
-      settings: {
-        slidesToShow: 1,
-      }
-    },
+  {
+    breakpoint: 993,
+    settings: {
+      slidesToShow: 2,
+    }
+  },
+  {
+    breakpoint: 769,
+    settings: {
+      slidesToShow: 1,
+    }
+  },
   ]
 });
 $('.our-blog-slider').slick({
   infinite: true,
-	dots: false,
+  dots: false,
   slidesToShow: 4,
   slidesToScroll: 1,
   responsive: [
-    {
-      breakpoint: 993,
-      settings: {
-        slidesToShow: 2,
-      }
-    },
-    {
-      breakpoint: 769,
-      settings: {
-        slidesToShow: 1,
-      }
-    },
+  {
+    breakpoint: 993,
+    settings: {
+      slidesToShow: 2,
+    }
+  },
+  {
+    breakpoint: 769,
+    settings: {
+      slidesToShow: 1,
+    }
+  },
   ]
 });
 
@@ -138,7 +138,7 @@ $(document).ready(function(){
   $(".pro-menu li").on("click","a.scroll", function (event) {
     event.preventDefault();
     var id  = $(this).attr('href'),
-      top = $(id).offset().top;
+    top = $(id).offset().top;
     $('body,html').animate({scrollTop: top}, 500);
   });
 });
@@ -150,3 +150,40 @@ function simpleTitle(argument) {
 function raschetTitle(argument) {
   $('.raschet-title').html(argument);
 }
+
+// comand slider
+$('.comand-slider').slick({
+  infinite: true,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 7000,
+  dots: false,
+  responsive: [
+    {
+      breakpoint: 769,
+      settings: {
+        slidesToShow: 1,
+      }
+    },
+  ]
+});
+
+// review slider
+$('.rev-slider').slick({
+  infinite: true,
+  arrows: false,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 7000,
+  dots: true,
+  responsive: [
+    {
+      breakpoint: 769,
+      settings: {
+        slidesToShow: 1,
+      }
+    },
+  ]
+});
